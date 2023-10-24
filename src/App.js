@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { Component } from "react";
+import "./App.css";
+import Form from "./components/Form";
+import List from "./components/List";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const postData = [];
+class App extends Component {
+  constructor() {
+    super();
+    this.state = { data: postData };
+    this.addClick = this.addClick.bind(this);
+  }
+
+  addClick(newItem) {
+    this.setState({
+      data: [newItem, ...this.state.data],
+      newItem: "",
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <Form addClick={this.addClick} />
+        <List data={this.state.data} />
+      </div>
+    );
+  }
 }
-
 export default App;
